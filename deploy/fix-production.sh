@@ -5,6 +5,18 @@ set -euo pipefail
 
 APP_DIR="/var/www/AutoDm"
 
+# Se o script falhar a meio, não deixar o site parado (já há build)
+on_error() {
+  if [[ -d "${APP_DIR}/.next" ]]; then
+    echo "==> Aviso: script falhou — a reiniciar autodm com o build existente..."
+    systemctl start autodm 2>/dev/null || true
+  fi
+}
+trap on_error ERR
+
+echo "==> Git (safe.directory para root + pasta www-data)"
+git config --global --add safe.directory "${APP_DIR}" 2>/dev/null || true
+
 echo "==> Parar processos Next.js incorretos (dev na porta 3001)"
 systemctl stop autodm 2>/dev/null || true
 pkill -f "next dev" 2>/dev/null || true
@@ -30,6 +42,8 @@ systemctl daemon-reload
 systemctl enable autodm
 systemctl restart autodm
 sleep 2
+
+trap - ERR
 
 echo "==> Testes"
 systemctl status autodm --no-pager || true
