@@ -12,15 +12,15 @@ Repositório: `https://github.com/BrunoKorpuzCoelho/AutoDm.git`
 
 ```bash
 cd /var/www
-git clone https://github.com/BrunoKorpuzCoelho/AutoDm.git autodm
-cd autodm
+git clone https://github.com/BrunoKorpuzCoelho/AutoDm.git AutoDm
+cd AutoDm
 bash deploy/install-vps.sh
 ```
 
 Ou, se já clonaste:
 
 ```bash
-cd /var/www/autodm
+cd /var/www/AutoDm
 git pull origin main
 bash deploy/install-vps.sh
 ```
@@ -41,14 +41,14 @@ certbot --nginx -d autodm.pt -d www.autodm.pt
 | Ver estado | `systemctl status autodm` |
 | Logs | `journalctl -u autodm -f` |
 | Reiniciar app | `systemctl restart autodm` |
-| Atualizar site | `cd /var/www/autodm && git pull && npm ci && npm run build && systemctl restart autodm` |
+| Atualizar site | `cd /var/www/AutoDm && git pull && npm ci && npm run build && systemctl restart autodm` |
 
 ## Estrutura na VPS
 
 ```
 /var/www/
   cubixone/   ← outro projeto
-  autodm/     ← este projeto (Next.js na porta 3001)
+  AutoDm/     ← este projeto (Next.js na porta 3001)
 ```
 
 Nginx faz proxy de `autodm.pt` → `http://127.0.0.1:3001`.
@@ -58,7 +58,7 @@ Nginx faz proxy de `autodm.pt` → `http://127.0.0.1:3001`.
 - **502 Bad Gateway** — `systemctl status autodm`; confirma que o build terminou sem erros.
 - **500 em CSS/JS com nomes `turbopack-*`** — estás em `next dev`, não em produção. Corre:
   ```bash
-  cd /var/www/autodm && bash deploy/fix-production.sh
+  cd /var/www/AutoDm && bash deploy/fix-production.sh
   ```
 - **Porta em uso** — edita `PORT` em `deploy/autodm.service` e `proxy_pass` em `deploy/nginx-autodm.conf`.
-- **Permissões** — `chown -R www-data:www-data /var/www/autodm`
+- **Permissões** — `chown -R www-data:www-data /var/www/AutoDm`

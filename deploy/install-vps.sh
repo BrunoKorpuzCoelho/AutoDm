@@ -4,7 +4,7 @@
 set -euo pipefail
 
 REPO="https://github.com/BrunoKorpuzCoelho/AutoDm.git"
-APP_DIR="/var/www/autodm"
+APP_DIR="/var/www/AutoDm"  # mesmo nome que o git clone (AutoDm)
 PORT=3001
 SERVICE="autodm"
 

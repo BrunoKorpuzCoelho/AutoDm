@@ -3,7 +3,7 @@
 # Executar na VPS como root: bash deploy/fix-production.sh
 set -euo pipefail
 
-APP_DIR="/var/www/autodm"
+APP_DIR="/var/www/AutoDm"
 
 echo "==> Parar processos Next.js incorretos (dev na porta 3001)"
 systemctl stop autodm 2>/dev/null || true
