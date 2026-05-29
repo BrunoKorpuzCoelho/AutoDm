@@ -35,8 +35,8 @@ export default function ComingSoonPage() {
 
             <p className="text-lg text-foreground/80 max-w-xl mx-auto text-pretty">
               Estamos a trabalhar no desenvolvimento do nosso website.
-              Futuramente irão existir novidades incriveis para si.
-              Ate la, contacte-nos pelos dados abaixo.
+              Futuramente irão existir novidades incríveis para si.
+              Até lá, contacte-nos pelos dados abaixo.
             </p>
           </div>
         </section>
@@ -87,7 +87,7 @@ export default function ComingSoonPage() {
                 <Clock className="w-6 h-6 text-primary" />
               </div>
               <div>
-                <p className="text-sm text-muted-foreground">Horario</p>
+                <p className="text-sm text-muted-foreground">Horário</p>
                 <p className="text-lg font-semibold text-foreground">
                   Por marcação
                 </p>
@@ -109,7 +109,7 @@ export default function ComingSoonPage() {
               allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              title="Localizacao Auto DM"
+              title="Localização Auto DM"
             />
           </div>
         </div>
