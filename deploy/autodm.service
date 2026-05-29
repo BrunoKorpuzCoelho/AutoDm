@@ -1,0 +1,17 @@
+[Unit]
+Description=Auto DM - Next.js (autodm.pt)
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/var/www/autodm
+Environment=NODE_ENV=production
+Environment=PORT=3001
+ExecStart=/usr/bin/npm run start
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
