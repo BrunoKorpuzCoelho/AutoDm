@@ -56,5 +56,9 @@ Nginx faz proxy de `autodm.pt` → `http://127.0.0.1:3001`.
 ## Problemas comuns
 
 - **502 Bad Gateway** — `systemctl status autodm`; confirma que o build terminou sem erros.
+- **500 em CSS/JS com nomes `turbopack-*`** — estás em `next dev`, não em produção. Corre:
+  ```bash
+  cd /var/www/autodm && bash deploy/fix-production.sh
+  ```
 - **Porta em uso** — edita `PORT` em `deploy/autodm.service` e `proxy_pass` em `deploy/nginx-autodm.conf`.
 - **Permissões** — `chown -R www-data:www-data /var/www/autodm`

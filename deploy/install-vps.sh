@@ -25,9 +25,14 @@ else
   cd "${APP_DIR}"
 fi
 
-echo "==> Build"
+echo "==> Parar dev servers na porta ${PORT}"
+pkill -f "next dev" 2>/dev/null || true
+fuser -k "${PORT}"/tcp 2>/dev/null || true
+
+echo "==> Build de produção"
 npm ci
-npm run build
+rm -rf .next
+NODE_ENV=production npm run build
 
 echo "==> Permissões"
 chown -R www-data:www-data "${APP_DIR}"

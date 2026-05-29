@@ -5,6 +5,19 @@ import type { NextRequest } from "next/server"
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
+  // Nunca bloquear assets do Next.js nem ficheiros estáticos
+  if (
+    pathname.startsWith("/_next") ||
+    pathname === "/favicon.ico" ||
+    pathname === "/icon.png" ||
+    pathname.startsWith("/hero-car") ||
+    /\.(?:css|js|mjs|map|woff2?|ttf|otf|ico|png|jpe?g|gif|webp|svg|mp4)$/i.test(
+      pathname
+    )
+  ) {
+    return NextResponse.next()
+  }
+
   if (pathname === "/") {
     return NextResponse.next()
   }
@@ -13,10 +26,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: [
-    /*
-     * Todas as rotas exceto ficheiros estáticos e assets do Next.js
-     */
-    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico)$).*)",
-  ],
+  matcher: ["/((?!_next|favicon\\.ico|icon\\.png|.*\\..*).*)"],
 }
